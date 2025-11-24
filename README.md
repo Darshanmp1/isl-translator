@@ -1,5 +1,7 @@
 🤖 Smart AI-Powered Indian Sign Language (ISL) Translator
 “Bridging the communication gap between speech and silence”
+
+
 🧩 Abstract
 
 The Smart AI ISL Translator is an intelligent real-time system designed to bridge the communication gap between hearing-impaired individuals and the general population.
