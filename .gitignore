@@ -1,0 +1,16 @@
+# Large model files
+model_training/models/*.pt
+model_training/models/checkpoints/*.pt
+*.pyc
+__pycache__/
+
+# Data files
+model_training/data/raw_videos/
+model_training/data/processed_frames/
+isl_sign2text/data_npz/*.npz
+
+# Output files
+output.mp4
+
+# IDE
+.vscode/

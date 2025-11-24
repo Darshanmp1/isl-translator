@@ -1,0 +1,205 @@
+🤖 Smart AI-Powered Indian Sign Language (ISL) Translator
+“Bridging the communication gap between speech and silence”
+🧩 Abstract
+
+The Smart AI ISL Translator is an intelligent real-time system designed to bridge the communication gap between hearing-impaired individuals and the general population.
+It performs two-way translation between Indian Sign Language (ISL) gestures and text/audio output, as well as converting text input into sign language animations.
+
+This dual functionality is implemented using Streamlit, MediaPipe, and Machine Learning models (SVM/CNN) trained on a custom dataset of ISL gestures.
+The system helps in education, accessibility, and daily communication for hearing-impaired communities.
+
+📘 Introduction
+
+Sign language is a visual means of communication used primarily by the hearing and speech-impaired community. However, communication barriers still exist between sign language users and non-signers.
+
+The Smart AI ISL Translator aims to:
+
+Recognize real-time hand gestures using webcam input and translate them into text/speech.
+
+Convert typed text or sentences into corresponding ISL sign videos, enabling two-way interaction.
+
+This system uses AI, Deep Learning, and Computer Vision techniques with tools like:
+
+MediaPipe Hands for gesture tracking
+
+Scikit-learn / TensorFlow models for classification
+
+Streamlit for interactive user interface
+
+gTTS (Google Text-to-Speech) for voice output
+
+⚙️ Implementation Overview
+🔹 Modules:
+
+Sign → Text Translator
+
+Captures hand gestures through webcam
+
+Detects and tracks landmarks using MediaPipe
+
+Extracts features, normalizes them, and classifies using a trained SVM model
+
+Converts predicted gesture to text and speech output
+
+Text → Sign Translator
+
+Accepts typed English text
+
+Checks for available ISL word/letter videos in the dataset
+
+Plays matching animations in sequence using MoviePy
+
+Provides a smooth video-based ISL output
+
+Unified Dashboard (main_app.py)
+
+Acts as the entry point for both translators
+
+Lets the user choose between the two translation modes
+
+🧠 Technologies Used
+Category	Tools / Frameworks
+Programming Language	Python 3.9+
+Frontend/UI	Streamlit
+Machine Learning	scikit-learn, TensorFlow/Keras
+Computer Vision	MediaPipe, OpenCV
+Speech	gTTS (Google Text-to-Speech)
+Video Processing	MoviePy
+Data Handling	NumPy, Pandas
+Storage Format	.joblib (Model), .mp4 (ISL videos)
+📁 Project Structure
+SMART_AI_ISL_TRANSLATOR/
+│
+├── isl_sign2text/                     ← Sign → Text Translator
+│   ├── app/
+│   │   └── streamlit_app.py
+│   ├── models/
+│   │   ├── classifier.joblib
+│   │   └── label_encoder.joblib
+│   ├── data/
+│   ├── 01_collect_dataset_auto.py
+│   ├── 02_train_classifier.py
+│   ├── 03_live_predict.py
+│   └── requirements.txt
+│
+├── model_training/                    ← Text → Sign Translator
+│   ├── src/
+│   │   └── app.py
+│   ├── models/
+│   ├── data/
+│   │   └── raw_videos/
+│   ├── results/
+│   └── requirements.txt
+│
+├── main_app.py                        ← Unified launcher dashboard
+└── README.md
+
+🧰 Setup Instructions
+1️⃣ Clone the Repository
+git clone https://github.com/<your-username>/SMART_AI_ISL_TRANSLATOR.git
+cd SMART_AI_ISL_TRANSLATOR
+
+2️⃣ Create Virtual Environment (Recommended)
+python -m venv venv
+venv\Scripts\activate      # for Windows
+source venv/bin/activate   # for macOS/Linux
+
+3️⃣ Install Dependencies
+
+For Sign → Text module:
+
+cd isl_sign2text
+pip install -r requirements.txt
+
+
+For Text → Sign module:
+
+cd ../model_training
+pip install -r requirements.txt
+
+
+(Or install all at once:)
+
+pip install streamlit mediapipe opencv-python moviepy joblib scikit-learn gtts googletrans==4.0.0-rc1
+
+🧪 Execution Steps
+🔹 Option 1: Launch Unified Dashboard
+streamlit run main_app.py
+
+
+This will open the home page where you can choose between Sign→Text or Text→Sign modules.
+
+🔹 Option 2: Run Sign → Text Translator Directly
+streamlit run isl_sign2text/app/streamlit_app.py
+
+
+This module:
+
+Opens webcam
+
+Detects hand gestures
+
+Displays live predictions
+
+Converts text output to voice
+
+🔹 Option 3: Run Text → Sign Translator Directly
+streamlit run model_training/src/app.py
+
+
+This module:
+
+Accepts English text input
+
+Plays matching ISL word/letter videos sequentially
+
+Automatically handles missing words by spelling them letter-by-letter
+
+📸 Expected Output
+Module	Output
+Sign → Text	Live webcam feed → Predicted ISL letter/word → Text + Audio output
+Text → Sign	Input sentence → Video display of corresponding ISL gestures
+Dashboard	One-click access to both modules with simple UI
+🧠 Key Features
+
+🖐 Real-time gesture recognition using MediaPipe
+
+🧠 Trained SVM/CNN model for accurate classification
+
+🗣 Voice output in multiple languages using Google TTS
+
+🎞 Video animation playback for ISL gestures
+
+🔄 Two-way translation (Sign↔Text↔Sign)
+
+🪶 Lightweight Streamlit UI for fast prototyping and deployment
+
+🧾 Execution Flow Summary
+Step	Process
+1	Capture gesture using webcam
+2	Extract hand landmarks using MediaPipe
+3	Normalize and preprocess coordinates
+4	Classify gesture using trained SVM/CNN model
+5	Display prediction + Convert to speech
+6	(Optional) Convert text back to ISL video
+🧑‍💻 Future Enhancements
+
+Integration with Flask + React for faster web-based version
+
+Add gesture-to-gesture contextual translation
+
+Expand dataset with word-level ISL signs
+
+Deploy on cloud (Render/Heroku) with real-time multilingual support
+
+🏆 Conclusion
+
+This project successfully demonstrates an AI-driven Indian Sign Language Translation System capable of bridging the communication barrier between hearing-impaired and non-signing individuals.
+Through real-time hand gesture recognition, text-to-sign visualization, and speech synthesis, it provides an accessible and practical communication tool.
+
+💡 Execution Commands Summary
+Module	Command
+Unified Dashboard	streamlit run main_app.py
+Sign → Text	streamlit run isl_sign2text/app/streamlit_app.py
+Text → Sign	streamlit run model_training/src/app.py
+

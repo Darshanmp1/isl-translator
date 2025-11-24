@@ -1,7 +1,8 @@
 import os
 import re
 from pathlib import Path
-from moviepy.editor import VideoFileClip, concatenate_videoclips, ColorClip
+from moviepy import VideoFileClip, concatenate_videoclips, ColorClip
+
 import streamlit as st
 
 # ===============================

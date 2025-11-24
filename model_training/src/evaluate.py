@@ -40,32 +40,41 @@ def evaluate_model():
     criterion = nn.CosineEmbeddingLoss()
     total_loss = 0
     similarities = []
+    correct = 0
+    total = 0
 
     with torch.no_grad():
         for text_inputs, video_inputs in dataloader:
             video_inputs = video_inputs.to(device)
 
-            # Remove token_type_ids if present
             text_inputs = {k: v.squeeze(1).to(device) for k, v in text_inputs.items() if k != "token_type_ids"}
 
             # Forward pass
             text_feat, video_feat = model(text_inputs, video_inputs)
 
-            # Cosine embedding loss
+            # Loss
             labels = torch.ones(text_feat.size(0)).to(device)
             loss = criterion(text_feat, video_feat, labels)
             total_loss += loss.item()
 
-            # Cosine similarity for reporting
+            # Cosine similarity
             cos_sim = nn.functional.cosine_similarity(text_feat, video_feat)
             similarities.extend(cos_sim.cpu().numpy())
 
+            # ----- ACCURACY -----
+            preds = (cos_sim > 0.5).long()         # predicted matches
+            true_labels = torch.ones_like(preds)    # real matches
+            correct += (preds == true_labels).sum().item()
+            total += preds.size(0)
+
     avg_loss = total_loss / len(dataloader)
     avg_similarity = sum(similarities) / len(similarities)
+    accuracy = correct / total
 
     print(f"✅ Evaluation Results:")
     print(f"Average Cosine Loss: {avg_loss:.4f}")
     print(f"Average Cosine Similarity: {avg_similarity:.4f}")
+    print(f"Accuracy: {accuracy:.4f}")
 
     # Plot histogram
     plt.figure(figsize=(8,6))
@@ -76,6 +85,7 @@ def evaluate_model():
     hist_path = os.path.join(RESULTS_DIR, "similarity_histogram.png")
     plt.savefig(hist_path)
     print(f"Histogram saved at {hist_path}")
+
 
 # ============================
 # Main
