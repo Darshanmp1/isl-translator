@@ -234,9 +234,14 @@ Dashboard	One-click access to both modules with simple UI
 
 **Text → Sign Generation (Deep Learning)**
 - **Dataset:** 200+ ISL video animations
+- **Training Loss:** Converged using Cosine Embedding Loss
+- **Similarity Score:** High text-video feature alignment (see histogram below)
 - **Video Quality:** 720p MP4 format
 - **Supported Words:** 150+ common ISL words + letter-by-letter spelling
 - **Response Time:** <2 seconds per sentence
+
+![Text-Video Similarity Distribution](model_training/results/similarity_histogram.png)
+*Distribution of cosine similarity scores between text and video embeddings*
 
 > **Note:** Accuracy may vary based on lighting conditions, camera quality, and hand positioning. Best results achieved with clear background and proper lighting.
 
