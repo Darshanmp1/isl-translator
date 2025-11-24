@@ -115,7 +115,6 @@ isl-translator/
 │   │   └── processed_frames/                      # (gitignored) Extracted frames
 │   │       └── .gitkeep
 │   ├── results/
-│   │   └── similarity_histogram.png               # Training results
 │   └── requirements.txt
 │
 └── screenshots/                                    # Application screenshots
