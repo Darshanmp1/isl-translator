@@ -96,31 +96,49 @@ SMART_AI_ISL_TRANSLATOR/
 
 🧰 Setup Instructions
 1️⃣ Clone the Repository
-git clone https://github.com/<your-username>/SMART_AI_ISL_TRANSLATOR.git
-cd SMART_AI_ISL_TRANSLATOR
+```bash
+git clone https://github.com/Darshanmp1/isl-translator.git
+cd isl-translator
+```
 
-2️⃣ Create Virtual Environment (Recommended)
+2️⃣ Download Required Datasets
+
+**⚠️ Important:** The datasets are not included in the repository due to their large size. Download them separately:
+
+**For Text → Sign Translation (ISL Videos):**
+- **Dataset:** Indian Sign Language Animated Videos
+- **Source:** [Kaggle - Indian Sign Language Animated Videos](https://www.kaggle.com/datasets/koushikchouhan/indian-sign-language-animated-videos)
+- **Download location:** Extract to `model_training/data/raw_videos/`
+
+**For Sign → Text Training (Optional - only if retraining):**
+- The model is pre-trained and included in `isl_sign2text/models/`
+- If you want to retrain, collect your own dataset using `01_collect_dataset_modern_auto.py`
+
+3️⃣ Create Virtual Environment (Recommended)
+```bash
 python -m venv venv
 venv\Scripts\activate      # for Windows
 source venv/bin/activate   # for macOS/Linux
+```
 
-3️⃣ Install Dependencies
+4️⃣ Install Dependencies
 
-For Sign → Text module:
-
+**For Sign → Text module:**
+```bash
 cd isl_sign2text
 pip install -r requirements.txt
+```
 
-
-For Text → Sign module:
-
+**For Text → Sign module:**
+```bash
 cd ../model_training
 pip install -r requirements.txt
+```
 
-
-(Or install all at once:)
-
+**(Or install all at once:)**
+```bash
 pip install streamlit mediapipe opencv-python moviepy joblib scikit-learn gtts googletrans==4.0.0-rc1
+```
 
 🧪 Execution Steps
 🔹 Option 1: Launch Unified Dashboard

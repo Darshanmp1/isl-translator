@@ -1,16 +1,20 @@
-# Large model files
+# Large model files and checkpoints
 model_training/models/*.pt
 model_training/models/checkpoints/*.pt
 *.pyc
 __pycache__/
 
-# Data files
-model_training/data/raw_videos/
-model_training/data/processed_frames/
+# Large dataset files (download separately)
+model_training/data/raw_videos/*
+!model_training/data/raw_videos/.gitkeep
+model_training/data/processed_frames/*
+!model_training/data/processed_frames/.gitkeep
 isl_sign2text/data_npz/*.npz
+isl_sign2text/data/images/
 
 # Output files
 output.mp4
+*.mp4
 
 # IDE
 .vscode/
