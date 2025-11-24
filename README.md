@@ -68,31 +68,60 @@ Video Processing	MoviePy
 Data Handling	NumPy, Pandas
 Storage Format	.joblib (Model), .mp4 (ISL videos)
 📁 Project Structure
-SMART_AI_ISL_TRANSLATOR/
+```
+isl-translator/
 │
-├── isl_sign2text/                     ← Sign → Text Translator
+├── main_app.py                                    # Unified Dashboard (Entry Point)
+├── README.md
+├── .gitignore
+│
+├── isl_sign2text/                                 # Sign → Text Translator Module
 │   ├── app/
-│   │   └── streamlit_app.py
+│   │   └── streamlit_app.py                       # Streamlit app for sign recognition
 │   ├── models/
-│   │   ├── classifier.joblib
-│   │   └── label_encoder.joblib
+│   │   ├── classifier.joblib                      # Trained SVM classifier
+│   │   └── label_encoder.joblib                   # Label encoder for classes
 │   ├── data/
-│   ├── 01_collect_dataset_auto.py
-│   ├── 02_train_classifier.py
-│   ├── 03_live_predict.py
+│   │   ├── landmarks.csv                          # Collected hand landmarks
+│   │   └── images/                                # (gitignored) Training images
+│   ├── data_npz/
+│   │   ├── digits_data_all.npz                    # (gitignored) Digit dataset
+│   │   ├── letters_data_all.npz                   # (gitignored) Letter dataset
+│   │   └── words_data_all.npz                     # (gitignored) Word dataset
+│   ├── 01_collect_dataset_modern_auto.py          # Dataset collection script
+│   ├── 02_train_classifier_unified.py             # Model training script
+│   ├── 03_live_predict_modern_ui.py               # Real-time prediction script
 │   └── requirements.txt
 │
-├── model_training/                    ← Text → Sign Translator
+├── model_training/                                # Text → Sign Translator Module
 │   ├── src/
-│   │   └── app.py
+│   │   ├── app.py                                 # Streamlit app for text-to-sign
+│   │   ├── model.py                               # Deep learning model architecture
+│   │   ├── dataset_loader.py                      # Data loading utilities
+│   │   ├── train.py                               # Model training pipeline
+│   │   ├── inference.py                           # Inference & video generation
+│   │   ├── evaluate.py                            # Model evaluation metrics
+│   │   ├── preprocess.py                          # Data preprocessing
+│   │   └── utils.py                               # Helper functions
 │   ├── models/
+│   │   ├── text_to_video_model.pt                 # (gitignored) Trained model
+│   │   └── checkpoints/                           # (gitignored) Training checkpoints
 │   ├── data/
-│   │   └── raw_videos/
+│   │   ├── labels.csv                             # Dataset labels
+│   │   ├── raw_videos/                            # (gitignored) ISL videos - Download from Kaggle
+│   │   │   └── .gitkeep
+│   │   └── processed_frames/                      # (gitignored) Extracted frames
+│   │       └── .gitkeep
 │   ├── results/
+│   │   └── similarity_histogram.png               # Training results
 │   └── requirements.txt
 │
-├── main_app.py                        ← Unified launcher dashboard
-└── README.md
+└── screenshots/                                    # Application screenshots
+    ├── Screenshot 2025-11-23 115543.png
+    ├── Screenshot 2025-11-23 115642.png
+    ├── Screenshot 2025-11-23 115828.png
+    └── Screenshot 2025-11-24 164327.png
+```
 
 🧰 Setup Instructions
 1️⃣ Clone the Repository
@@ -200,15 +229,29 @@ Step	Process
 4	Classify gesture using trained SVM/CNN model
 5	Display prediction + Convert to speech
 6	(Optional) Convert text back to ISL video
-🧑‍💻 Future Enhancements
+📸 Application Screenshots
 
-Integration with Flask + React for faster web-based version
+### Unified Dashboard
+![Main Dashboard](screenshots/Screenshot%202025-11-24%20164327.png)
+
+### Sign to Text Translation
+![Sign to Text](screenshots/Screenshot%202025-11-23%20115543.png)
+
+### Text to Sign Translation
+![Text to Sign](screenshots/Screenshot%202025-11-23%20115642.png)
+
+### Real-time Gesture Recognition
+![Gesture Recognition](screenshots/Screenshot%202025-11-23%20115828.png)
+
+🧑‍💻 Future Enhancements
 
 Add gesture-to-gesture contextual translation
 
-Expand dataset with word-level ISL signs
+Expand dataset with more word-level ISL signs
 
-Deploy on cloud (Render/Heroku) with real-time multilingual support
+Deploy on cloud (Render/Heroku/AWS) with real-time multilingual support
+
+Mobile application development for Android/iOS
 
 🏆 Conclusion
 
